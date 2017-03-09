@@ -9,5 +9,5 @@ tags: learning
 |ELK|☆☆☆☆|
 |hadoop|☆☆☆☆|
 |DB|☆☆☆☆|
-|concurrency|☆☆☆☆☆|
-|Alg|☆☆☆☆☆|
+|算法|☆☆☆☆☆|
+|并发|☆☆☆☆☆|
