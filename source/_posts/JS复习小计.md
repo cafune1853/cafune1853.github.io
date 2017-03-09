@@ -1,8 +1,8 @@
 ---
 title: JS复习小计
 date: 2017-03-09 16:41:24
-categories:
-tags:
+categories: 前端
+tags: JS
 ---
 ---
 
