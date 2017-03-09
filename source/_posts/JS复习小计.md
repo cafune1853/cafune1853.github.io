@@ -12,7 +12,7 @@ tags:
 console.log(a);
 var a = 1;
 ```
-
+<!-- more -->
 ---
 
 * 区块不构成单独的作用域(ECMAScript6则相反)
