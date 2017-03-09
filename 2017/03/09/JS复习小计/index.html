@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="js中存在变量提升,即先解析代码，获取所有被声明的变量，然后再一行一行地运行。这与python等脚本语言不同.123//可以成功运行,tips:变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。console.log(a);var a = 1;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS复习小计">
+<meta property="og:url" content="http://cafune1853.github.io/2017/03/09/JS复习小计/index.html">
+<meta property="og:site_name" content="Doggy">
+<meta property="og:description" content="js中存在变量提升,即先解析代码，获取所有被声明的变量，然后再一行一行地运行。这与python等脚本语言不同.123//可以成功运行,tips:变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。console.log(a);var a = 1;">
+<meta property="og:updated_time" content="2017-03-09T09:43:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS复习小计">
+<meta name="twitter:description" content="js中存在变量提升,即先解析代码，获取所有被声明的变量，然后再一行一行地运行。这与python等脚本语言不同.123//可以成功运行,tips:变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。console.log(a);var a = 1;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://cafune1853.github.io/2017/03/09/JS复习小计/"/>
+
+
+
+
+
+  <title> JS复习小计 | Doggy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Doggy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cafune1853.github.io/2017/03/09/JS复习小计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Doggy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doggy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS复习小计
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-09T16:41:24+08:00">
+                2017-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<ul>
+<li>js中存在变量提升,即先解析代码，获取<strong>所有</strong>被声明的变量，然后再一行一行地运行。这与python等脚本语言不同.<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可以成功运行,tips:变量提升只对var命令声明的变量有效，如果一个变量不是用var命令声明的，就不会发生变量提升。</span></div><div class="line"><span class="built_in">console</span>.log(a);</div><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><ul>
+<li><p>区块不构成单独的作用域(ECMAScript6则相反)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line">a <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li>switch-case使用的是严格比较符(===)   </li>
+</ul>
+<hr>
+<ul>
+<li><p>支持与java一样的break/continue label.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">top:</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)&#123;</div><div class="line">      <span class="keyword">if</span> (i === <span class="number">1</span> &amp;&amp; j === <span class="number">1</span>) <span class="keyword">break</span> top;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'i='</span> + i + <span class="string">', j='</span> + j);</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li>6种基本类型number,string,boolean,object(real object,array,function),undefined,null.可以看出函数是作为第一等公民存在的.</li>
+</ul>
+<hr>
+<ul>
+<li><p>结合上诉六种类型使用typeof判断一个变量的类型.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//number --&gt; "number";string --&gt; "string";boolean --&gt; "boolean"</span></div><div class="line"><span class="comment">//function --&gt; "function",undefined --&gt; "undefined",除此这五种都返回"object"</span></div><div class="line"><span class="comment">//以上几个类型中特殊的是null,type null === "object",但null本质上是特殊值.</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> v;</div><div class="line"><span class="comment">//使用严格比较符,该语句为true</span></div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> v === <span class="string">"undefined"</span>) &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li>null表示空值,是一个设计上的缺陷,一般使用undefined(未定义)即可.</li>
+</ul>
+<hr>
+<ul>
+<li><p>以下六个值被视为false(自动转换为false),其他值均为true,包括空数组[]/空对象{}都是true.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span>;<span class="literal">null</span>;<span class="literal">false</span>;<span class="number">0</span>;<span class="literal">NaN</span>;<span class="string">""</span>或<span class="string">''</span>（空字符串)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>number汇总</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">js里只有<span class="number">64</span>位float一种类型(IEEE <span class="number">754</span>),在某些需要整形的场合会强转成int.</div><div class="line"></div><div class="line"><span class="number">1.</span> 由于采用IEEE <span class="number">754</span>表示,所以浮点数比较时可能出错.</div><div class="line">   eg: <span class="number">0.1</span>+<span class="number">0.2</span> === <span class="number">0.3</span> <span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="number">2.</span> IEEE <span class="number">754</span>中第一位表示整体值的正负,接下<span class="number">11</span>位表示指数部分,最后<span class="number">52</span>位表示小数部分.(IEEE小数部分自带一个<span class="number">1</span>,即实际是<span class="number">1.</span>XXXXX..XXXX,实际有<span class="number">53</span>位)</div><div class="line">整体表示为:(<span class="number">-1</span>)^符号位 * <span class="number">1.</span>xx...xx * <span class="number">2</span>^指数位</div><div class="line"></div><div class="line"><span class="number">3.</span> 指数位表示了数值范围,所以实际最大的数值范围为,(<span class="number">2</span>^<span class="number">1024</span>,<span class="number">2</span>^<span class="number">-1023</span>)</div><div class="line"></div><div class="line"><span class="number">4.</span> 小数位指示了数值精度,所以实际最大的精度为<span class="number">2</span>^<span class="number">53</span><span class="number">-1</span> --&gt; <span class="number">9007199254740991</span>,即只有[-(<span class="number">2</span>^<span class="number">53</span><span class="number">-1</span>),<span class="number">2</span>^<span class="number">53</span><span class="number">-1</span>]范围内的整数可以精确表示!!!不在该范围内的值(除了科学计数法变大)一定存在舍入,这也是jquery.parseJSON转换一个大的id时容易出错的原因.</div><div class="line"><span class="comment">// 多出的三个有效数字，将无法保存</span></div><div class="line"><span class="number">9007199254740992111</span></div><div class="line"><span class="comment">// 9007199254740992000除以正零得到+Infinity，除以负零得到-Infinity</span></div><div class="line"></div><div class="line"><span class="number">5.</span> <span class="number">0</span>b前导表示二进制</div><div class="line"></div><div class="line"><span class="number">6.</span> 除以正零得到+<span class="literal">Infinity</span>，除以负零得到-<span class="literal">Infinity</span></div><div class="line"></div><div class="line"><span class="number">7.</span> <span class="literal">NaN</span>表示非数字,如<span class="number">0</span>/<span class="number">0</span> --&gt; <span class="literal">NaN</span> <span class="number">5</span> - <span class="string">'x'</span> --&gt; <span class="literal">NaN</span>;</div><div class="line">它的类型是number,不是一种独立类型.NaN不等于任何值，包括它本身.</div><div class="line">isNaN(x),用于判断x是不是<span class="literal">NaN</span>,如果x不是number,则调用<span class="built_in">Number</span>(x)进行类型转换.NaN和任何值比较返回<span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="number">8.</span> <span class="literal">Infinity</span>表示无穷大,-<span class="literal">Infinity</span>表示负无穷.isFinite判断一个数是不是非无穷大,<span class="built_in">isFinite</span>(<span class="number">1</span>) --&gt; <span class="literal">true</span>,<span class="built_in">isFinite</span>(Infinite) --&gt; <span class="literal">false</span>,<span class="built_in">isFinite</span>(<span class="literal">NaN</span>) --&gt; <span class="literal">false</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>数值函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> <span class="built_in">parseInt</span>(x),将字符串x,按字符逐个解析成int,直到遇到非数字.</div><div class="line">若第一个数字非数字(头部空格会自动去掉),返回<span class="literal">NaN</span>.</div><div class="line">若传入其他值,先转换成string,再使用规则解析.</div><div class="line">parseInt(<span class="string">"1.2"</span>) <span class="comment">// 1</span></div><div class="line"><span class="built_in">parseInt</span>(<span class="number">1e5</span>)<span class="comment">// 100000,string(1e5) --&gt; '100000'</span></div><div class="line"><span class="built_in">parseInt</span>(<span class="string">"1e10"</span>)<span class="comment">// 1</span></div><div class="line"><span class="built_in">parseInt</span>(<span class="string">'a'</span>) <span class="comment">// NaN</span></div><div class="line"><span class="built_in">parseInt</span>(<span class="string">'   21'</span>) <span class="comment">// 21</span></div><div class="line"></div><div class="line"><span class="built_in">parseInt</span>(),可以传入第二个数表示进制,此时前面的字符串不应该有前导.</div><div class="line">字符串以<span class="number">0</span>X开头,按<span class="number">16</span>进制解析,<span class="built_in">parseInt</span>(<span class="string">"0x10"</span>) --&gt; <span class="number">16</span></div><div class="line">字符串以<span class="number">0</span>开头,按照<span class="number">10</span>进制解析,<span class="built_in">parseInt</span>(<span class="string">"010"</span>) --&gt; <span class="number">10</span></div><div class="line"></div><div class="line"><span class="number">2.</span><span class="built_in">parseFloat</span>,将字符串解析成float,可以解析.与e符号,也会自动取出前导空白字符.</div><div class="line">parseFloat(<span class="string">"1.2e5"</span>) <span class="comment">// 120000,可以解析了</span></div><div class="line">如果不是字符串,也会先进行类型转换.</div><div class="line">parseFloat([])<span class="comment">//NaN,无法转换,返回NaN</span></div><div class="line"><span class="built_in">parseFloat</span>(<span class="string">""</span>)<span class="comment">//NaN</span></div><div class="line">与<span class="built_in">Number</span>的区别如下</div><div class="line"><span class="built_in">parseFloat</span>(<span class="literal">true</span>)  <span class="comment">// NaN</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></div><div class="line"></div><div class="line"><span class="built_in">parseFloat</span>(<span class="literal">null</span>) <span class="comment">// NaN</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line"><span class="built_in">parseFloat</span>(<span class="string">''</span>) <span class="comment">// NaN</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">''</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line"><span class="built_in">parseFloat</span>(<span class="string">'123.45#'</span>) <span class="comment">// 123.45</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">'123.45#'</span>) <span class="comment">// NaN</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li>字符串汇总<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 使用<span class="string">"abx"</span>[<span class="number">2</span>]来获得某个字符.</div><div class="line"></div><div class="line"><span class="number">2.</span> JS内部使用UTF16编码,<span class="string">"s"</span>.length返回码元个数,对于辅助平面不特殊处理.</div><div class="line"></div><div class="line"><span class="number">3.</span> JavaScript引擎不支持辅助平面解析,所以涉及到辅助平面字符的字符串处理函数会出错.</div><div class="line">以下是正确提取支持辅助平面字符的函数</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSymbols</span>(<span class="params">string</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> length = string.length;</div><div class="line">  <span class="keyword">var</span> index = <span class="number">-1</span>;</div><div class="line">  <span class="keyword">var</span> output = [];</div><div class="line">  <span class="keyword">var</span> character;</div><div class="line">  <span class="keyword">var</span> charCode;</div><div class="line">  <span class="keyword">while</span> (++index &lt; length) &#123;</div><div class="line">    character = string.charAt(index);</div><div class="line">    charCode = character.charCodeAt(<span class="number">0</span>);</div><div class="line">    <span class="keyword">if</span> (charCode &gt;= <span class="number">0xD800</span> &amp;&amp; charCode &lt;= <span class="number">0xDBFF</span>) &#123;</div><div class="line">      output.push(character + string.charAt(++index));</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      output.push(character);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> output;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="number">4.</span> btoa将base64转为ASCII.</div><div class="line"></div><div class="line"><span class="number">5.</span> atob将ASCII转为base64.</div><div class="line"></div><div class="line"><span class="number">6.</span> 以上两个函数只支持ASCII转换,其他字符应该先转换成ASCII,如</div><div class="line"><span class="keyword">var</span> s = <span class="string">"你好"</span>;</div><div class="line"><span class="keyword">var</span> en = <span class="built_in">encodeURIComponent</span>(s);</div><div class="line">atob(en);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>对象小结</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 创建方式</div><div class="line"><span class="keyword">var</span> o1 = &#123;</div><div class="line">  <span class="attr">p</span>: <span class="number">123</span>,</div><div class="line">  <span class="attr">m</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;</div><div class="line">  &#125;;</div><div class="line"><span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line"><span class="keyword">var</span> o3 = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</div><div class="line"></div><div class="line"><span class="number">2.</span> 对象的键值是字符串,所以是否加引号没有影响,但是如果其名字不符合变量</div><div class="line">的命名规范,则一定要加引号.</div><div class="line"></div><div class="line"><span class="number">3.</span> 支持动态创建属性</div><div class="line"><span class="keyword">var</span> oo = &#123;&#125;</div><div class="line">oo.p1 = <span class="number">9</span>;</div><div class="line">oo.m = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="number">4.</span> JavaScript规定，如果行首是大括号，一律解释为语句（即代码块）。如果要解释为表达式（即对象），必须在大括号前加上圆括号。</div><div class="line">eg:</div><div class="line"><span class="built_in">eval</span>(<span class="string">'&#123;foo: 1&#125;'</span>) <span class="comment">// 123</span></div><div class="line"><span class="built_in">eval</span>(<span class="string">'(&#123;foo: 1&#125;)'</span>) <span class="comment">// &#123;foo: 123&#125;</span></div><div class="line"></div><div class="line"><span class="number">5.</span> 属性访问</div><div class="line">点操作符,只支持非数字类型的访问,o.p;</div><div class="line">[]操作符,会将参数解释为string,如果传进去参数为number,其也会先转换成</div><div class="line">string,而不作为下标index进行访问.eg: o[<span class="number">1</span>] = <span class="string">"s"</span> ;<span class="comment">//o --&gt; &#123;"1":"s"&#125;</span></div><div class="line"></div><div class="line"><span class="number">6.</span> 访问不存在的属性会返回<span class="literal">undefined</span>.</div><div class="line"><span class="comment">// 检查a变量是否被声明</span></div><div class="line"><span class="keyword">if</span> (a) &#123;...&#125; <span class="comment">// 报错</span></div><div class="line"><span class="comment">//由于在浏览器环境下,所有的全局变量都是,window对象的属性.</span></div><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.a) &#123;...&#125; <span class="comment">// 不报错</span></div><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>[<span class="string">'a'</span>]) &#123;...&#125; <span class="comment">// 不报错</span></div><div class="line"></div><div class="line"><span class="number">7.</span> <span class="built_in">Object</span>.keys(o),返回对象o的所有键值数组</div><div class="line"></div><div class="line"><span class="number">8.</span> <span class="keyword">delete</span>操作符用于删除某个属性,其用于返回<span class="literal">true</span>,除了<span class="keyword">delete</span>一个不能删除的属性.</div><div class="line"></div><div class="line"><span class="number">9.</span> <span class="keyword">in</span> 操作符用于判断一个对象是不是有某个键值</div><div class="line">eg: <span class="string">"p"</span> <span class="keyword">in</span> o</div><div class="line"><span class="number">10.</span> <span class="keyword">for</span> .. in用于遍历一个对象的所有属性</div><div class="line"></div><div class="line"><span class="number">11.</span> <span class="keyword">with</span>语句,<span class="keyword">with</span>内部的属性必须是之前就创建的属性,否则会创建一个全局对象;一般不建议使用.</div><div class="line">with(o)&#123;</div><div class="line">p1 = <span class="number">1</span>;</div><div class="line">p2 = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line">等价于</div><div class="line">o.p1 = <span class="number">1</span>;</div><div class="line">o.p2 = <span class="number">2</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 数组是特殊的对象,其键值由以<span class="number">0</span>开始,依次递增的整数组成(可能有其他键).</div><div class="line">只支持[]访问.</div><div class="line"></div><div class="line"><span class="number">2.</span> 数组中可以放入任意数据.</div><div class="line"></div><div class="line"><span class="number">3.</span> 数组的大小可以自适应,但最大为<span class="number">2</span>^<span class="number">32</span><span class="number">-1</span></div><div class="line"></div><div class="line"><span class="number">4.</span> length属性可写,当length设置为<span class="number">0</span>时,则清空当前数组.</div><div class="line"></div><div class="line"><span class="number">5.</span> <span class="keyword">for</span> ... in, <span class="keyword">in</span>操作都是对数组的键而言,而不是对于数组的值.for .. in</div><div class="line">操作数组时,会遍历除了下标index之外的其他键.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>如果同一个函数被多次声明，后面的声明就会覆盖前面的声明。</div><div class="line">JavaScript引擎将函数名视同变量名，所以采用<span class="function"><span class="keyword">function</span>命令声明函数时，整个函数会像变量声明一样，被提升到代码头部。</span></div><div class="line"><span class="title">function</span> <span class="title">f</span>(<span class="params"></span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line">f() <span class="comment">// 2</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line">f() <span class="comment">// 2</span></div><div class="line"></div><div class="line"><span class="number">2.</span> 如果同时采用<span class="function"><span class="keyword">function</span>命令和赋值语句声明同一个函数，最后总是采用赋值语句的定义。</span></div><div class="line"><span class="title">var</span> <span class="title">f</span> = <span class="title">function</span>(<span class="params"></span>) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line">f() <span class="comment">// 1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="number">2</span>);</div><div class="line">&#125;</div><div class="line">f() <span class="comment">// 1</span></div><div class="line"></div><div class="line"><span class="number">3.</span> 不能在条件语句中声明函数</div><div class="line"><span class="comment">//不允许</span></div><div class="line"><span class="keyword">if</span> (foo) &#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//要达到在条件语句中定义函数的目的，只有使用函数表达式。</span></div><div class="line"><span class="keyword">if</span>(foo)&#123;</div><div class="line">   <span class="keyword">var</span> x = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="number">4.</span> 函数的length属性返回期望的形参个数.</div><div class="line"></div><div class="line"><span class="number">5.</span> toString()方法直接返回函数代码.</div><div class="line"></div><div class="line"><span class="number">6.</span> 函数内部可以调用<span class="built_in">arguments</span>对象,调用<span class="built_in">arguments</span>.length获得实参个数,</div><div class="line">调用argument[<span class="number">0</span>]获得第一个参数值...,<span class="built_in">arguments</span>对象不是数组!!!</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>变量作用域</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Javascript只有两种作用域：全局作用域与局部作用域.</div><div class="line"><span class="number">1.</span> 在函数外部声明的变量为全局变量,可以被函数内部调用.</div><div class="line"><span class="number">2.</span> 在函数内部声明的变量为局部变量,不可以在函数外部访问.</div><div class="line"><span class="number">3.</span> 局部变量会覆盖同名的全局变量.</div><div class="line"><span class="number">4.</span> 函数内也存在着变量提升.</div><div class="line"><span class="number">5.</span> 不使用<span class="keyword">var</span>声明的变量,都属于全局变量.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>函数闭包与立即调用的函数表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> 从一个函数（外部函数）中返回另一个/一组函数（内部函数），称之为闭包。其中所有的内部函数共享外部函数的变</div><div class="line">量，其中一个内部函数改变外部函数变量x，则其他函数读取也会发现x变更。</div><div class="line"><span class="comment">//1.1 一个最简单的例子，只返回一个内部函数。</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createIncrementor</span>(<span class="params">start</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> start++;</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> inc = createIncrementor(<span class="number">5</span>);</div><div class="line">inc() <span class="comment">// 5</span></div><div class="line">inc() <span class="comment">// 6</span></div><div class="line">inc() <span class="comment">// 7</span></div><div class="line"></div><div class="line"><span class="comment">//1.2 返回一组函数（包装成对象）</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params">initVal</span>) </span>&#123;</div><div class="line">    <span class="comment">//模块模式</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">changeVal</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>) </span>&#123;</div><div class="line">            initVal = newVal;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">showVal</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(initVal);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> xobj = x(<span class="number">10</span>);</div><div class="line">xobj.showVal(); <span class="comment">// 10</span></div><div class="line">xobj.changeVal(<span class="number">20</span>);</div><div class="line">xobj.showVal(); <span class="comment">// 20</span></div><div class="line"></div><div class="line"><span class="comment">//1.3 一个错误的例子，打印从（0，i-1）的每个值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loop</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> x = <span class="number">0</span>;</div><div class="line">    <span class="comment">//一个函数对象数组，本意是每个函数对象打印一个值，但由于共享x,所以最后实际调用都打印了同一个值。</span></div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line">    <span class="keyword">for</span> (;x &lt; i;++x)&#123;</div><div class="line">        arr.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">           <span class="built_in">console</span>.log(x);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="comment">//loop中的for循环结束后，x为100</span></div><div class="line"><span class="keyword">var</span> arf = loop(<span class="number">100</span>);</div><div class="line"><span class="comment">//都打印100</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; arf.length;++i)&#123;</div><div class="line">    arf[i]();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//修改</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loop</span>(<span class="params">i</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> x = <span class="number">0</span>;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line">    <span class="keyword">for</span> (;x &lt; i;++x)&#123;</div><div class="line">        <span class="comment">//使用IIFE将下标x固定，返回一个新函数用于打印。</span></div><div class="line">        arr.push(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(e);</div><div class="line">            &#125;</div><div class="line">        &#125;(x));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//1.4 利用函数+闭包实现封装</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">people</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">    <span class="comment">//该方法只有闭包可以访问，实现了封装</span></div><div class="line">    <span class="keyword">var</span> innerPlus = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> name+age;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">//该变量只有闭包可以访问</span></div><div class="line">    <span class="keyword">var</span> word = <span class="string">"love"</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(word);</div><div class="line">        <span class="keyword">return</span> innerPlus();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p = people(<span class="string">"go"</span>,<span class="number">12</span>);</div><div class="line"><span class="built_in">console</span>.log(p());</div><div class="line"></div><div class="line"><span class="comment">//1.5 实现记忆（缓存）功能</span></div><div class="line"><span class="keyword">var</span> hash = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//用于记忆以及计算过的值。</span></div><div class="line">    <span class="keyword">var</span> caled = &#123;&#125;;</div><div class="line">    <span class="keyword">var</span> cal = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"invoked"</span>);</div><div class="line">        <span class="keyword">var</span> res = s+<span class="string">"hash"</span>;</div><div class="line">        caled[s] = res;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params">s</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> caled[s] || cal(s);</div><div class="line">    &#125;;</div><div class="line">&#125;();</div><div class="line"><span class="comment">//只调用一次进行实际计算。</span></div><div class="line"><span class="built_in">console</span>.log(hash(<span class="string">"1212"</span>));</div><div class="line"><span class="built_in">console</span>.log(hash(<span class="string">"1212"</span>));</div><div class="line"></div><div class="line"><span class="number">2.</span> 立即调用的函数表达式(IIFE),主要是为了避免全局变量污染.</div><div class="line">function关键字可以解释为语句或者表达式,JS规定,当<span class="function"><span class="keyword">function</span>出现在行首</span></div><div class="line">解释为语句定义,不能调用<span class="title">IIFE</span>.</div><div class="line">// 语句</div><div class="line"><span class="title">function</span> <span class="title">f</span>(<span class="params"></span>) &#123;&#125;</div><div class="line"><span class="comment">// 表达式</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//IIFE,必须要求function解释为表达式.</span></div><div class="line"><span class="comment">//加(),js将其解释为表达式</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x);&#125;)(<span class="number">2</span>);</div><div class="line">or</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x);&#125;(<span class="number">2</span>));</div><div class="line">or</div><div class="line">!<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x);&#125;(<span class="number">2</span>);</div><div class="line">or</div><div class="line"><span class="keyword">var</span> i = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x);&#125;(<span class="number">2</span>);</div><div class="line">即只要不让<span class="function"><span class="keyword">function</span>出现在开头就可以调用<span class="title">IIFE</span>.</span></div><div class="line">相反的</div><div class="line"><span class="title">function</span>(<span class="params"></span>)&#123;&#125;(); --&gt; 会提示语法错误.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>运算符</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">1.+,运算规则如下:</div><div class="line">(1) 如果运算子是对象,则先转换成基本类型(string/number/boolean),具体规</div><div class="line">则是先调用valueOf,如果返回值不是基本类型,则再调用toString().</div><div class="line">Date类型直接调用toString().</div><div class="line">(2) 两个运算子都转换为基本类型后,如果其中一个是string,则进行字符串拼接.</div><div class="line">(3) 两个运算子都转为number(false -&gt; 0,true -&gt; 1),进行加法.</div><div class="line"></div><div class="line">2.%,mod运算,其运算结果的正负由第一个运算子决定.</div><div class="line">-1 % 2 // -1</div><div class="line">1 % -2 // 1</div><div class="line"></div><div class="line">3.+,单目运算符.可以将任何值转换成number,同Number函数功能.</div><div class="line">+true //1</div><div class="line">+[] //0</div><div class="line">+&#123;&#125; //NaN</div><div class="line"></div><div class="line">3. 比较运算符,比较规则如下</div><div class="line">(1) 如果运算子是对象,则先转换成基本类型(string/number/boolean),具体规</div><div class="line">则是先调用valueOf,如果返回值不是基本类型,则再调用对象的toString().</div><div class="line">(2) 两个运算子都转换为基本类型后,如果都是string,则按照unicode码点比较.</div><div class="line">(3) 否则将其他基本类型转为number(Number()),再比较,string可能会被转为NaN.</div><div class="line"></div><div class="line">4.严格相等运算符</div><div class="line">a === b</div><div class="line">(1) 如果a与b的类型不一致,则直接返回false;</div><div class="line">(2) 如果a,b为object,则直接比较对象地址(是否引用同一对象).</div><div class="line">(3) 除了NaN === NaN// false,其他特殊值严格相等</div><div class="line"></div><div class="line">5.相等运算符</div><div class="line">a == b</div><div class="line">(1) 如果a,b类型相同,则其结果和===一样.</div><div class="line">(2) 如果a,b类型不同,则会进行类型转换再比较,转换规则如下:</div><div class="line">   a.原始类型的数据会同一使用Number转换成number比较</div><div class="line">   b.对象与原始类型比较时,会将对象转换为相应的原始类型再比较.</div><div class="line">   eg: [1] == "1"//String([1]) == "1"</div><div class="line">       [1,2] == 1 //Number([1,2]) == "2;</div><div class="line">(3)undefined/null与其他值比较时返回false,但是null == undefined//true</div><div class="line">tips: 由于相等运算符进行类型转换,所以可能出现违反直觉的结果,所以只建议使</div><div class="line">用===;</div><div class="line"></div><div class="line">6. ! 取反操作符有类型转换(转为boolean)作用,除了以下6个值取反后为true,其</div><div class="line">余值取反后均为true.(六个值:0,false,null,undefined,NaN,""或'')</div><div class="line">常用!!x 取代 Boolean(x)</div><div class="line"></div><div class="line">7. void运算符,作用时执行一个表达式,并不返回值.</div><div class="line">//void的IIFE</div><div class="line">eg: void function(x)&#123;console.log(x)&#125;(1)</div><div class="line">//用于在超级链接中插入代码，目的是返回undefined可以防止网页跳转。</div><div class="line">//在不刷新当前页的情况下,打开新窗口</div><div class="line">&lt;a href="javascript:void window.open('http://www.baidu.com')"&gt;click&lt;/a&gt;</div><div class="line">//以下链接,如果f()不返回false,则会跳转当前页面.</div><div class="line">&lt;a href="http://example.com" onclick="f();"&gt;文字&lt;/a&gt;</div><div class="line">//使用以下void形式替代</div><div class="line">&lt;a href="javascript:void(f());"&gt;文字&lt;/a&gt;</div><div class="line">//提交表单,页面不跳转</div><div class="line">&lt;a href="javascript: void(document.form.submit())"&gt;</div><div class="line">文字&lt;/a&gt;</div><div class="line"></div><div class="line">8. , 运算符 取最后一个值作为整体的返回值</div><div class="line">var x = (i++,2)</div><div class="line">x //2</div><div class="line"></div><div class="line">9. 除了=和?:的结合顺序是右结合,其他运算符都是左结合.</div><div class="line"></div><div class="line">var x = y = z = 1; //var x = (var y = (var z = 1));</div><div class="line">a ? b : c ? d : e ? f : g; // a ? b : (c ? d : (e ? f : g));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>类型转换</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> <span class="built_in">Number</span>转换</div><div class="line">基本类型转number</div><div class="line"><span class="comment">// 数值：转换后还是原来的值</span></div><div class="line"><span class="built_in">Number</span>(<span class="number">324</span>) <span class="comment">// 324</span></div><div class="line"></div><div class="line"><span class="comment">// 字符串：如果可以被解析为数值，则转换为相应的数值</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">'324'</span>) <span class="comment">// 324</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">'12e2'</span>) <span class="comment">//1200</span></div><div class="line"></div><div class="line"><span class="comment">// 字符串：如果不可以被解析为数值，返回NaN</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">'324abc'</span>) <span class="comment">// NaN</span></div><div class="line"></div><div class="line"><span class="comment">// 空字符串转为0</span></div><div class="line"><span class="built_in">Number</span>(<span class="string">''</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line"><span class="comment">// 布尔值：true 转成1，false 转成0</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">false</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line"><span class="comment">// undefined：转成 NaN</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></div><div class="line"></div><div class="line"><span class="comment">// null：转成0</span></div><div class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></div><div class="line"></div><div class="line">对象转number,规则如下</div><div class="line"></div><div class="line">（<span class="number">1</span>）调用对象自身的valueOf方法。如果返回原始类型的值，则直接对</div><div class="line">该值使用<span class="built_in">Number</span>函数，不再进行后续步骤。</div><div class="line">（<span class="number">2</span>）如果valueOf方法返回的还是对象，则改为调用对象自身的</div><div class="line">toString方法。如果返回原始类型的值，则对该值使用<span class="built_in">Number</span>函数，不再进行后续步骤。</div><div class="line">（<span class="number">3</span>）如果toString方法返回的是对象，就报错。</div><div class="line">o -&gt; valueOf -&gt; toString(除了string转换，其他都是按照该流程)</div><div class="line"></div><div class="line"><span class="number">2.</span> <span class="built_in">String</span></div><div class="line">基本类型</div><div class="line"><span class="built_in">String</span>(<span class="literal">false</span>) --&gt; <span class="string">"false"</span></div><div class="line"></div><div class="line">对象转为string</div><div class="line">(<span class="number">1</span>)先调用对象自身的toString方法。如果返回原始类型的值，则对该</div><div class="line">值使用<span class="built_in">String</span>函数，不再进行以下步骤。</div><div class="line">(<span class="number">2</span>)如果toString方法返回的是对象，再调用valueOf方法。如果返回</div><div class="line">原始类型的值，则对该值使用<span class="built_in">String</span>函数，不再进行以下步骤。</div><div class="line">(<span class="number">3</span>)如果valueOf方法返回的是对象，就报错。</div><div class="line"></div><div class="line"><span class="number">3.</span> <span class="built_in">Boolean</span>(x)与！！x一致，只有六个值返回<span class="literal">false</span>。</div><div class="line"><span class="number">4.</span> 自动转换点</div><div class="line">（<span class="number">1</span>）<span class="keyword">if</span>/<span class="keyword">while</span>/<span class="keyword">do</span> 会自动转换成boolean</div><div class="line">（<span class="number">2</span>）+ ，若运算子存在string，则会主动转为string,否则都转为number</div><div class="line">(<span class="number">3</span>) 比较操作 ,如果两个运算子不全是string，则转为number。</div><div class="line">（<span class="number">4</span>） 其他运算会转成number <span class="string">'123'</span> * []<span class="comment">//0</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>错误处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span><span class="built_in">Error</span>对象,基本属性有name(名称)，message(信息),stack(错误堆栈);</div><div class="line"></div><div class="line"><span class="number">2.</span>原生错误类型,<span class="number">7</span>个：</div><div class="line"><span class="built_in">SyntaxError</span> <span class="comment">//解析代码错误</span></div><div class="line"><span class="built_in">ReferenceError</span> <span class="comment">//引用一个不存在的变量</span></div><div class="line"><span class="built_in">RangeError</span> <span class="comment">//数组长度为负数，Number对象的方法参数超出范围，以及函数堆栈超过最大值.</span></div><div class="line"><span class="built_in">TypeError</span> <span class="comment">//类型错误</span></div><div class="line"><span class="built_in">URIError</span> <span class="comment">//URI函数参数错误时抛出</span></div><div class="line"><span class="built_in">EvalError</span> <span class="comment">// eval()方法错误</span></div><div class="line"><span class="built_in">Error</span> <span class="comment">//顶级错误</span></div><div class="line"></div><div class="line"><span class="number">3.</span><span class="keyword">throw</span>语句可以抛出任意数据，函数将在<span class="keyword">throw</span>处结束。</div><div class="line"><span class="keyword">throw</span> <span class="number">1</span>;</div><div class="line"><span class="keyword">throw</span> <span class="string">"error"</span>;</div><div class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"you make a mistake"</span>);</div><div class="line"></div><div class="line"><span class="number">4.</span> <span class="keyword">try</span>&#123;..&#125;<span class="keyword">catch</span>(e)&#123;..&#125;<span class="keyword">finally</span>&#123;..&#125;</div><div class="line">由于可以<span class="keyword">throw</span>非<span class="built_in">Error</span>实例的数据，所以错误信息e，不一定第一个error对象。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>编码风格</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>区块风格，大括号应该紧跟关键字，原因是js会自动加<span class="string">';'</span>,可能导致错误</div><div class="line">block &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line">错误示例</div><div class="line"><span class="keyword">return</span></div><div class="line">&#123;</div><div class="line">  <span class="attr">key</span>: value</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 相当于底下代码,实际返回了undefined。</span></div><div class="line"><span class="keyword">return</span>;</div><div class="line">&#123;</div><div class="line">  <span class="attr">key</span>: value</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="number">2.</span>函数定义结尾没有<span class="string">';'</span>，但函数表达式一定要加<span class="string">';'</span>.</div><div class="line">function f() &#123;</div><div class="line">&#125; <span class="comment">// 没有分号</span></div><div class="line"><span class="comment">//一定要有;</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="number">3.</span>建议自己手动添加<span class="string">';'</span></div><div class="line">（<span class="number">1</span>）js自动添加分号，只在下一行开头与当前行末尾连在一起无法解释</div><div class="line">时，才会自动添加分号，所以由js添加分号容易出错。</div><div class="line">（<span class="number">2</span>）自动加分号的规则</div><div class="line">如果一行的行首是++<span class="regexp">/--时，会在++/</span>--前添加分号。</div><div class="line">a</div><div class="line">++</div><div class="line">b</div><div class="line">--</div><div class="line">c</div><div class="line"><span class="comment">//等价于</span></div><div class="line">a;</div><div class="line">++b;</div><div class="line">--c;</div><div class="line"></div><div class="line">如果<span class="keyword">continue</span>、<span class="keyword">break</span>、<span class="keyword">return</span>和<span class="keyword">throw</span>这四个语句后面，直接跟换行符，则会自动添加分号。</div><div class="line">这意味着</div><div class="line"><span class="keyword">return</span></div><div class="line">&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;; <span class="comment">//不会返回预期结果，所以语句块的大括号要紧跟关键字。</span></div><div class="line"></div><div class="line"><span class="number">4.</span> 尽量减少使用全局变量，如果使用尽量全大写。</div><div class="line"><span class="number">5.</span> 由于[函数内]变量提升，所以尽量把变量声明语句放到代码块头部。</div><div class="line"><span class="number">6.</span> 建议使用<span class="built_in">Object</span>.create()替代<span class="keyword">new</span>一个对象。</div><div class="line"><span class="number">7.</span> 不建议使用<span class="keyword">with</span>语句。</div><div class="line"><span class="number">8.</span> <span class="keyword">switch</span>-<span class="keyword">case</span>改写为对象结构</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doAction</span>(<span class="params">action</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> actions = &#123;</div><div class="line">    <span class="string">'hack'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">'hack'</span>;</div><div class="line">    &#125;,</div><div class="line">    <span class="string">'slash'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">'slash'</span>;</div><div class="line">    &#125;,</div><div class="line">    <span class="string">'run'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">'run'</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> actions[action] !== <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Invalid action.'</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> actions[action]();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类库</p>
+<ul>
+<li>Object类库</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.keys(o):返回o中所有非继承且可枚举的属性数组.(<span class="keyword">for</span> .. in即遍历该属性数组)</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.getOwnPropertyNames(o):返回o中所有非继承的属性数组.</div></pre></td></tr></table></figure>
+</li>
+<li><p>面向对象编程</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line">- JS使用构造函数来创建对象.</div><div class="line">构造函数与普通函数没有本质上的区别,只是在使用<span class="keyword">new</span>调用时会返回相应的对象.</div><div class="line">function Vehicle()&#123;</div><div class="line">	<span class="keyword">this</span>.price = <span class="number">100</span>;</div><div class="line">	<span class="comment">//如果x是一个对象,则会将x赋给v;</span></div><div class="line">	<span class="comment">//如果x为基本类型,则返回this对象.</span></div><div class="line">	<span class="comment">//没有return语句,默认返回this.</span></div><div class="line">	<span class="keyword">return</span> x;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle();</div><div class="line"></div><div class="line">- <span class="keyword">new</span>的调用过程</div><div class="line">先创建一个空对象&#123;&#125;并将<span class="keyword">this</span>指向该对象，将空对象的__proto__指向构造函数（对象）的prototype属性。</div><div class="line"></div><div class="line">- <span class="keyword">this</span>关键字!!!</div><div class="line"><span class="keyword">this</span>的语义是函数的上下文运行环境(调用者),具体如下.</div><div class="line">(<span class="number">1</span>) 在全局环境下,指的是顶级对象<span class="built_in">window</span>.</div><div class="line">	this === <span class="built_in">window</span>; <span class="comment">//true</span></div><div class="line">	<span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	     <span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">//window</span></div><div class="line">	&#125;();</div><div class="line">(<span class="number">2</span>) 使用<span class="keyword">new</span>创建时,会指向一个空对象,初始化后并返回.</div><div class="line">(<span class="number">3</span>) 当函数f作为某个对象x的属性时,f里的<span class="keyword">this</span>指向x.</div><div class="line">    tips:在obj.prototype.m中定义的方法,其调用时obj.m(),实际调用者是</div><div class="line">    obj,所以<span class="keyword">this</span>指向obj.</div><div class="line">	var x = &#123;</div><div class="line">	<span class="attr">a</span>:<span class="number">1</span>,</div><div class="line">	<span class="attr">m</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  </div><div class="line">	&#125;&#125;;</div><div class="line">	x.m();<span class="comment">//1</span></div><div class="line">如果将某个对象的方法赋值给另一个对象，会改变<span class="keyword">this</span>的指向。</div><div class="line">	<span class="keyword">var</span> o1 = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">	o1.m = <span class="number">1</span>;</div><div class="line">	o1.f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>.m);&#125;;</div><div class="line"></div><div class="line">	o1.f() <span class="comment">// 1</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">	o2.m = <span class="number">2</span>;</div><div class="line">	o2.f = o1.f</div><div class="line">	o2.f() <span class="comment">// 2</span></div><div class="line">(<span class="number">4</span>) 出现在html元素的js调用中时,即指的的是元素本身.</div><div class="line">	&lt;input type=<span class="string">"text"</span> onclick=<span class="string">"show(this);"</span>&gt;</div><div class="line"></div><div class="line">- <span class="keyword">this</span>关键字的使用注意点</div><div class="line">  (<span class="number">1</span>) 避免使用嵌套<span class="keyword">this</span>,可以考虑中间变量实现.</div><div class="line">	var o = &#123;</div><div class="line">	  <span class="attr">f1</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">	    <span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	      <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">	    &#125;();</div><div class="line">	  &#125;</div><div class="line">	&#125;</div><div class="line">	o.f1()</div><div class="line">	<span class="comment">// Object</span></div><div class="line">	<span class="comment">// Window</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> o = &#123;</div><div class="line">	  <span class="attr">f1</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">	    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">	    <span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	      <span class="built_in">console</span>.log(that);</div><div class="line">	    &#125;();</div><div class="line">	  &#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	o.f1()</div><div class="line">	<span class="comment">// Object</span></div><div class="line">	<span class="comment">// Object</span></div><div class="line"></div><div class="line"> (<span class="number">2</span>) 不要在回调函数中使用<span class="keyword">this</span>.</div><div class="line"></div><div class="line">- 固定<span class="keyword">this</span>(给<span class="keyword">this</span>指定具体对象)</div><div class="line">(<span class="number">1</span>) call(obj,arg1,..,)方法,使<span class="keyword">this</span>指向obj并调用方法,arg*为参数.</div><div class="line">	var o = &#123;&#125;;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">	&#125;;</div><div class="line">	f.call(o) === o <span class="comment">// true</span></div><div class="line"></div><div class="line">(<span class="number">2</span>) apply(obj,[arg1,arg2..]),与call相同,只不过参数用数组传递.</div><div class="line">(<span class="number">3</span>) bind(obj,arg1),返回一个新函数将其<span class="keyword">this</span>指向obj,并将参数固定到新函数上.</div><div class="line"></div><div class="line">	var add = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>) </span>&#123;</div><div class="line">	  <span class="keyword">return</span> x*<span class="keyword">this</span>.m + y*<span class="keyword">this</span>.n;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> obj = &#123;</div><div class="line">	  <span class="attr">m</span>: <span class="number">2</span>,</div><div class="line">	  <span class="attr">n</span>: <span class="number">2</span></div><div class="line">	&#125;;</div><div class="line">	<span class="comment">//固定了第一个参数5,并返回新函数.</span></div><div class="line">	<span class="keyword">var</span> newAdd = add.bind(obj, <span class="number">5</span>);</div><div class="line">	<span class="comment">//不再需要传入第一个参数</span></div><div class="line">	newAdd(<span class="number">5</span>);</div><div class="line"></div><div class="line">由于每次bind时都会返回新函数,所以注册Event时,所使用的函数不应该调用bind,否则无法删除.</div><div class="line">正确的做法:</div><div class="line">	<span class="keyword">var</span> listener = o.m.bind(o);</div><div class="line">	element.addEventListener(<span class="string">'click'</span>, listener);</div><div class="line">	<span class="comment">//  ...</span></div><div class="line">	element.removeEventListener(<span class="string">'click'</span>, listener);</div><div class="line">	<span class="comment">//错误的做法</span></div><div class="line">	element.addEventListener(<span class="string">'click'</span>, o.m.bind(o));</div></pre></td></tr></table></figure>
+</li>
+<li><p>继承与原型链</p>
+<ul>
+<li>构造函数也是对象（Function）</li>
+<li>构造函数X的prototype属性，称为原型对象。所有由X创建的对象x,都拥有同一个原型prototype.</li>
+<li>原型对象里有一个属性constructor,它表示声明拥有该原型对象的类（构造函数）。X.prototype.constructor –&gt; 指向X</li>
+<li>每个对象都有构造函数（Function对象），而每个构造函数都有prototype（为对象），这样就形成了一条原型链，x -&gt; X.prototype -&gt; class(X.prototype).prototype –&gt; Object.prototype</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">livingArea</span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.livingArea = livingArea;</div><div class="line">	<span class="comment">//每个Animal对象都会创建一个该函数的实例，所以不建议，建议把方法放到prototype中。</span></div><div class="line">	<span class="keyword">this</span>.x = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有Animal实例共用该函数对象</span></div><div class="line">Animal.prototype.showLivingArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//该this最终会指向正确的对象。</span></div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.livingArea);</div><div class="line">&#125;;</div><div class="line">Animal a1 = <span class="keyword">new</span> Animal(<span class="string">"China"</span>);</div><div class="line">Animal a2 = <span class="keyword">new</span> Animal(<span class="string">"Japan"</span>);</div><div class="line">a1.x === a2.x --&gt; 返回<span class="literal">false</span></div><div class="line">a1.showLivingArea === a2.showLivingArea --&gt; 返回<span class="literal">true</span></div><div class="line"></div><div class="line"><span class="comment">//继承实现</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name,area</span>)</span>&#123;</div><div class="line">	Aniaml.call(<span class="keyword">this</span>,area);</div><div class="line">	<span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"><span class="comment">//可以不传参数</span></div><div class="line">People.prototype = <span class="keyword">new</span> Animal();</div><div class="line"><span class="comment">//constructor指向该原型对象所在的构造函数，即一个构造函数的原型的constructor指向该构造函数本身。</span></div><div class="line"><span class="comment">//这保证了一个具体对象在调用p.constructor时的正确性</span></div><div class="line">People.prototype.constructor = People;</div><div class="line"></div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> People(<span class="string">"g"</span>,<span class="number">12</span>);</div><div class="line">p.constructor <span class="comment">//将使用原型链查询到People.</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Some skill</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span>巧用 || 与 &amp;&amp;</div><div class="line"><span class="number">1.1</span> val1 || val2，当!!val1 === <span class="literal">true</span>时，直接返回val1,否则返回val2.</div><div class="line">eg:obj.value || <span class="string">"1"</span>;    <span class="comment">//当obj.value不存在时,返回"1"</span></div><div class="line"><span class="number">1.2</span> val1 &amp;&amp; val2,当!!val1 === <span class="literal">true</span>时，返回val2.否则返回val1.</div><div class="line">eg：obj.x || obj.x.y;   <span class="comment">//只有在obj.x不为undefined的情况下，才计算obj.x.y。</span></div><div class="line"></div><div class="line"><span class="number">2.</span>将<span class="keyword">this</span>应用到内部函数中。</div><div class="line">js中，如果一个函数f,它没有被绑定到一个对象的属性上。那么，该函数中的<span class="keyword">this</span>关键字指向一个全局对象。</div><div class="line">这导致了内部函数绑定错误，不能访问外部方法指向的对象属性。可以通过以下方式解决：</div><div class="line">num.abs = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//这里this指向num对象</span></div><div class="line">	<span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">	<span class="keyword">var</span> innerHelper = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> that.value &lt; <span class="number">0</span> ? -that.value : that.value;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> innerHelper();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="number">3.</span>提供一个方法，用于给所有函数对象添加方法。</div><div class="line"><span class="built_in">Function</span>.method = <span class="function"><span class="keyword">function</span>(<span class="params">name,f</span>)</span>&#123;</div><div class="line">	<span class="built_in">Function</span>.prototype[name] = f;<span class="comment">//Function.prototype是所有函数对象的原型</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//Add method "say" to all function object.</span></div><div class="line"><span class="built_in">Function</span>.method(<span class="string">'say'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">'here'</span>);&#125;);</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;).say();<span class="comment">//Will print the word here.</span></div><div class="line"></div><div class="line"><span class="number">4.</span>漂亮的继承写法</div><div class="line"><span class="built_in">Function</span>.method(<span class="string">'inherit'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">Father</span>)</span>&#123;</div><div class="line">	<span class="comment">//this会指向构造函数</span></div><div class="line">	<span class="keyword">this</span>.prototype = <span class="keyword">new</span> Father();</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;);</div><div class="line"><span class="keyword">var</span> Cat = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;).inherit(Animal);</div><div class="line"></div><div class="line"><span class="number">5.</span>纯粹的基于原型的继承（将所有属性与方法都放到原型中）</div><div class="line"><span class="built_in">Object</span>.beget = <span class="function"><span class="keyword">function</span>(<span class="params">atom</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">	F.prototype = atom;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">&#125;</div><div class="line"><span class="comment">//所有使用beget(obj)创建的对象，都共享obj的属性和方法。</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/09/skill-list/" rel="next" title="skill-list">
+                <i class="fa fa-chevron-left"></i> skill-list
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Doggy" />
+          <p class="site-author-name" itemprop="name">Doggy</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Doggy</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
