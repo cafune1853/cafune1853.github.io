@@ -4,6 +4,7 @@ date: 2017-03-09 16:41:24
 categories: 算法
 tags: Java
 ---
+快速排序，key的下标可任取
 <!-- more -->
 ```
  /**
