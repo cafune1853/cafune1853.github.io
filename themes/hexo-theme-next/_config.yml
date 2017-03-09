@@ -12,7 +12,7 @@ keywords: "Hexo, NexT"
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
 rss:
-
+#
 # Specify the date when the site was setup
 #since: 2015
 
@@ -40,7 +40,7 @@ menu:
   categories: /categories
   tags: /tags
   archives: /archives
-  about: /about
+  #about: /about
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -180,9 +180,9 @@ sidebar:
   #  - always  expand for all pages automatically
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggle.
-  display: post
+  #display: post
   #display: always
-  #display: hide
+  display: hide
   #display: remove
 
   # Sidebar offset from top menubar in pixels.
@@ -217,7 +217,7 @@ excerpt_description: true
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 # Post meta display settings
