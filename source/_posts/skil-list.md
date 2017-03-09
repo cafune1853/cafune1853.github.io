@@ -5,9 +5,9 @@ tags: learning
 ---
 |Name|重要性|
 |-|-|
-|scala|***|
-|ELK|****|
-|hadoop|****|
-|DB|****|
-|concurrency|*****|
-|Alg|*****|
+|scala|☆☆☆|
+|ELK|☆☆☆☆|
+|hadoop|☆☆☆☆|
+|DB|☆☆☆☆|
+|concurrency|☆☆☆☆☆|
+|Alg|☆☆☆☆☆|
