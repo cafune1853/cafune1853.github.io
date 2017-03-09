@@ -1,8 +1,8 @@
 ---
-title: JS复习小计
+title: Java 快速排序
 date: 2017-03-09 16:41:24
-categories: 前端
-tags: JS
+categories: 算法
+tags: Java
 ---
 <!-- more -->
 ```

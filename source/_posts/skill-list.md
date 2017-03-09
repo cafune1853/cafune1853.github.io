@@ -1,7 +1,7 @@
 ---
 title: skill-list
 date: 2017-03-09 15:20:51
-categories: skill
+categories: 其他
 tags:
 ---
 技能表
