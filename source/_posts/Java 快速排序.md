@@ -4,7 +4,7 @@ date: 2017-03-09 16:41:24
 categories: 前端
 tags: JS
 ---
-
+<!-- more -->
 ```
  /**
   * @author 黄志伟
@@ -17,7 +17,6 @@ tags: JS
              System.out.println(array[i]);
          }
      }
-     <!-- more -->
      /**
       * @param nums 要递归处理的数组
       * @param left 左边界 begin 0
