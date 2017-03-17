@@ -281,10 +281,10 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-#duoshuo_shortname:
+duoshuo_shortname: cafune1853
 
 # Disqus
-disqus_shortname: cafune1853
+#disqus_shortname: cafune1853
 
 # Hypercomments
 #hypercomments_id:

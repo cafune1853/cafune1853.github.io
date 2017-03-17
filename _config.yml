@@ -67,7 +67,10 @@ pagination_dir: page
 theme: hexo-theme-next
 
 # set disqus
-disqus_shortname: cafune1853
+#disqus_shortname: cafune1853
+
+# set duoshuo
+duoshuo_shortname: cafune1853
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
