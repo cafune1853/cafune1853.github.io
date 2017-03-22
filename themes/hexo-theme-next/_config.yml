@@ -281,7 +281,7 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-duoshuo_shortname: cafune1853
+# duoshuo_shortname: cafune1853
 
 # Disqus
 #disqus_shortname: cafune1853
@@ -294,7 +294,7 @@ duoshuo_shortname: cafune1853
 
 # Support for youyan comments system.
 # You can get your uid from http://www.uyan.cc
-#youyan_uid: your uid
+youyan_uid: 2128146
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
