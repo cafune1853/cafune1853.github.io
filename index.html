@@ -257,6 +257,161 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://cafune1853.github.io/2017/08/14/Evernote.enex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Doggy">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doggy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/14/Evernote.enex/" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T15:05:59+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/14/Evernote.enex/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/14/Evernote.enex/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/14/Evernote.enex/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <html>
+<head>
+  <title>Evernote Export</title>
+  <basefont face="微软雅黑" size="2">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="exporter-version" content="Evernote Windows/304720 (zh-CN, DDL); Windows/6.3.9600 (Win64);">
+  <style>
+    body, td {
+      font-family: 微软雅黑;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="399">
+
+<div><span><ul><li><b><span style="font-size: 16px;">Git底层模型</span></b></li></ul><div><br></div><div>git底层为一个key-value存储系统，它将文件的内容通过hash计算获得一个全局唯一的hash码，作为代表该文件key,然后将其文件内容存为一个二进制文件，即为图中Hash Object。Hash Object中只有文件内容以及hash值作为文件名。文件名保存在Tree Object中，Tree Object 可以索引到其他Tree Object / Hash Object.Tree Object映射到现实文件系统中的文件夹。</div><div>每次提交时都会产生一个commit以及一个新的顶级虚拟Tree。</div><div>CommitA 中提交了三个文件File[A-C], 分别生成了Hash Object[A-C],其中有一个文件夹B,生成了TreeB。提交时产生虚拟顶级TreeA。</div><div>CommitB 时,修改了文件A、B的内容，于是CommitB基于修改后的文件A',B' 生成全新的Hash Object[A'|B'];，对于未修改的文件C则直接引用。</div><div><b>注意：</b></div><ul><li style="display:inline;list-style:none;"><ul><li>每次修改文件后生成的hashObject是基于整个文件生成的，是<b>全量生成</b>，而不是与之前的hashObject比较进行增量生成。</li><li>文件暂存区 index 类似于一个虚拟顶级Tree节点，文件被加到暂存区中，则会立刻生成hashObject,并被index索引。如果再次修改该文件，再次将其加入暂存区，则又会生成一个hashObject.之前的hashObject将不再被index索引，所以成为了一个无用对象，可以使用git fsck 查看，可以使用git prune清除。</li></ul></li></ul><div>                                                                                             <img src="Evernote.enex_files/Image.png" type="image/png" style="height: auto;"></div><div><br></div><ul><li><b><span style="font-size: 16px;">Merge与cherry-pick/Rebase之间的区别</span></b></li></ul><div><br></div><div>merge合并时，会查找共有的父提交，然后每个文件基于父提交中的文件进行比较，若出现双方修改则冲突。</div><div>Rebase/cherry-pick则是基于补丁的，是一种增量式记录，如git format-patch F，则会列出F相对于E修改的文件，将两个提交中所有修改的文件作为补丁。</div><div>在D处拣选F,git cherry-pick F。则会将F相对于E修改的所有文件（E、F均要）打包成patch,应用到D时，则以E的文件作为基本文件，进行D、E比较，若双方修改文件，则冲突。相对于以E作为D，F的共同提交，进行合并。</div><div>                                                           <img src="Evernote.enex_files/Image [1].png" type="image/png" style="height: auto;"></div><div>                                                           <img src="Evernote.enex_files/Image [2].png" type="image/png" style="height: auto;"></div><ul><li>HEAD </li></ul><div>HEAD默认会指向branch,branch再指向commit,若HEAD直接指向commit,则会除于头指针分离状态.此时所有提交都很有可能丢失</div><div><br></div><ul><li>基本命令大全<ul><li>-------------------------------------------------------------------------------------</li><li>git help &lt;command&gt; //查看命令的帮助文档</li><li>git rev-parse master //查看引用指向的hash id</li><li>git rev-list --graph --format=%B &lt;commit&gt; //列出该commit及其之前的所有commit并展示</li><li>git rev-list --graph <span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">--format=%B</span> <span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commitA&gt;..&lt;commitB&gt; //列出</span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">B及B的祖先提交,并排除A及A的祖先提交</span></li><li><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">git rev-list --graph </span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">--format=%B</span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commitA&gt;...&lt;commitB&gt; //列出A与B的并集并排除A与B的交集</span></li><li><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">git rev-list --graph </span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">--format=%B </span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commitA&gt;^@ //A的所有祖先提交,将A排除在外</span></li><li><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">git rev-list --graph </span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">--format=%B</span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">  &lt;commitA&gt;^! //只列出A一个提交</span></li><li>git cat-file -t &lt;id&gt; //查看hash id的类型, <span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">该id可以表示一个commit/hash Object/tree... </span></li><li>git cat-file -p &lt;id&gt; //查看hash id的内容,当为hash Object时即为查看文件内容</li><li>-------------------------------------------------------------------------------------</li><li>&lt;commit&gt;~n //表示该提交向上遍历n个parent</li><li>git reflog show HEAD|master -n //查看HEAD/master之前的n个都指向哪些提交</li><li>HEAD|branch@{n} //代表该HEAD/branch之前第n个指向的提交</li><li>&lt;commit&gt;^{tree}   // 代表提交对应的虚拟树节点</li><li>&lt;commit&gt;^{parent} //代表该提交的父提交</li><li>-------------------------------------------------------------------------------------</li><li>git diff --cached  [&lt;commit&gt;]  //比较暂存区与提交的区别,默认提交为HEAD</li><li>git diff &lt;commit&gt; //比较工作区所有已追踪文件与commit的区别</li><li>git diff //比较工作区与index的区别</li><li>git log --pretty //展示最近的提交</li><li>git st -s //精简展示变化, 两个标志位,第一个表示暂存区相对于版本库的编号,第二个表示工作区相对暂存区的变化</li><li>git archive -o now.zip &lt;commit&gt; //基于提交进行打包</li><li>-------------------------------------------------------------------------------------------------</li><li>git reset --soft &lt;commit&gt;  //将当前分支&amp;&amp;HEAD重置到commit, 不改变暂存区和工作区</li><li>git reset [--mixed] &lt;commit&gt; //将当前分支&amp;&amp;HEAD以及暂存区重置到commit.</li><li>git reset --hard &lt;commit&gt; //将当前分支&amp;&amp;HEAD 暂存区 以及 工作区都重置到commit,此时所有工作区的变更会丢失,无法找回.</li><li>前三种方式都会将HEAD移向相应的commit,若HEAD此时指向branch则branch也会一起移动</li><li>git reset [--mixed] &lt;commit&gt; &lt;filePath&gt; //将暂存区中filePath对应的文件内容替换成commit中的文件内容</li><li>git reset --hard &lt;commit&gt; &lt;filePath&gt; //将暂存区与工作区中filePath所对应的文件内容替换成commit中的文件内容</li><li>----------------------------------------------------------------------------------------</li><li>git checkout [<span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commit&gt;</span>] &lt;filePath&gt; //使用commit对应的file替换暂存区中的文件, commit默认为暂存区, filePath若为.则表示所有文件</li><li>git checkout  &lt;branch&gt; //切换到一个分支</li><li>git checkout -b <span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;newBranch&gt;</span> [<span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commit&gt;|&lt;branch&gt;</span>]  //从提交/分支创建一个新分支并切换到该新分支,若不指定则表示HEAD指向的提交</li><li>git branch &lt;newBranch&gt; <span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">[</span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">&lt;commit&gt;|&lt;branch&gt;</span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">] </span><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">//从提交/分支创建一个新分支但不切换分支,若不指定则表示HEAD指向的提交</span></li><li>git checkout &lt;commit&gt; //将HEAD直接指向commit,分支不会跟着移动,此时处于分离头指针状态.</li><li>--------------------------------------------------------------------------------------------</li><li>git stash //暂存工作区以及暂存区的工作 ==&gt; 原理上会对暂存区以及工作区各做一次提交,分别记录文件内容.不会暂存未跟踪的新文件</li><li>git stash save &quot;message&quot; //给该stash一个描述,在查看暂存列表时会看到该描述</li><li>git stash list //查看所有暂存</li><li>git stash apply [stash@{n}|&lt;stash_id&gt;] //应用暂存,有可能出现冲突,默认应用栈顶,可以直接应用暂存id</li><li>git stash drop  [stash@{n}] //移除暂存,默认移除栈顶</li><li>git stash pop [stash@{n}] //移除并应用暂存,默认移除栈顶,只建议在没有冲突时使用,避免冲突解决失败时,暂存丢失</li><li>git stash clear //清空所有暂存,不建议使用</li><li>----------------------------------------------------------------------------------------------</li><li>git rm &lt;file&gt; //将从暂存区以及工作区中移除该文件</li><li>git add -i //命令式交互,用于工作区与暂存区互操作,可以将文件加入/移除暂存区(单纯移除,不会对工作区造成影响),使用回车确认</li><li>git add -- &lt;file&gt; //将file加入暂存区</li><li>----------------------------------------------------------------------------------------------</li><li>git tag &lt;tagName&gt; //对当前HEAD所指的提交打一个tag</li><li>git tag -a &lt;tagName&gt; //使用tagName对HEAD所指的提交打一个tag并附加一个描述文件.</li><li>git tag -m &lt;message&gt; &lt;tagName&gt; //使用tagName对HEAD所指的提交打一个tag,并附加简单描述</li><li>git tag -s &lt;tagName&gt; //打tag并应用作者签名</li><li>git tag -l //列出所有tag</li><li>git tag -l -n2 //列出所有tag并打印前两行描述</li><li>git tag -l v3.* //俩出所有以v3.开头的标签</li><li>git tag -d &lt;tagName&gt; //移除一个tag</li><li>git push &lt;remote&gt; &lt;tagName&gt; //将一个tag推送到远程库中 </li><li>-----------------------------------------------------------------------------------------------</li><li>git cherry-pick //拣选</li><li>git rebase --onto &lt;newBranch&gt; &lt;since&gt; &lt;till&gt; //将&lt;since&gt;..&lt;till&gt;(不包含since),换基到newBranch上,若till不为一个branch,则会处于头指针分离的状态.底层实现: checkout到till =&gt; reset --hard newBranch =&gt; cherry-pick &lt;since&gt;..&lt;till&gt;</li><li>git rebase &lt;branch&gt; &lt;=&gt; git rebase --onto &lt;branch&gt; &lt;branch&gt; HEAD //将featureA 换基到master上,则git checkout featureA =&gt; git rebase master</li><li>git rebase -i ... // ...与以上命令相同,提供交互文本,十分强大,推荐使用这个</li><li>----------------------------------------------------------------------------------------------</li><li>git remote add repoName url //创建一个远程版本库</li><li>git remote remove repoName //移除一个远程版本库</li><li>git remote -v /查看所有远程版本库</li><li>git remote &lt;repoName&gt; -set-url --push &lt;pushUrl&gt; //为push操作设置独立的url</li><li>一个版本库可以配置不同的拉取地址以及推送地址,大部分情况下,二者一致.</li><li>git fetch &lt;repoName&gt; //同步远程版本库到本地,此时不会和本地分支合并</li><li><span style="font-family:gotham, helvetica, arial, sans-serif;font-size:14px;">git push &lt;repoNmae&gt; &lt;branch&gt; //向远程版本库推送分支</span></li><li>本地的每一个分支都可以通过设置branch.&lt;branch&gt;.remote为其指定一个远程版本库,若不指定则默认为origin,在push/pull时会使用相关联的remote进行操作,具体url由remote给出.</li><li>指定push.default为simple则每次推送时,只推送当前分支,要成功推送的前提是远程版本库得存在相同名称的分支,第一次可以使用git push &lt;remote&gt; &lt;branch&gt; 在远程版本库中创建</li><li>git pull //需要当前分支指定branch.&lt;branch&gt;.merge ,确定使用哪个远程分支来进行合并,否则报错.</li><li>git branch -r 查看所有远程分支</li><li>git branch 查看所有本地分支</li><li>------------------------------------------------------------------------------------------------</li><li>git format-patch -s HEAD~3..HEAD //使用format-patch创建补丁文件</li><li>cat *.patch | git am  //应用补丁</li></ul></li></ul><div> </div><div><br></div><div>附件：</div><div><a href="Evernote.enex_files/Git.vsdx"><img src="Evernote.enex_files/8fab18e291f7fb005d2b3fe4d3b9d494.png" alt="Git.vsdx"></a><a href="file:///C:/Users/huangzhw/Desktop/test" target="_blank" rel="external">C:\Users\huangzhw\Desktop\test</a></div><div><br></div></span>
+</div></a></body></html> 
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://cafune1853.github.io/2017/03/09/Unicode 详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -995,7 +1150,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
